@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import JobItem from "../jobsPage/JobItem";
+import Loading from "../Loading";
 import { fetchSingleJob } from "../../actions/index";
 
 class JobDetailsPage extends Component {
@@ -16,7 +17,7 @@ class JobDetailsPage extends Component {
     let job = jobs[id];
 
     if (!(Object.keys(jobs).length || Object.keys(fetchedSingleJob).length)) {
-      return <div>Loading...</div>;
+      return <Loading />;
     }
 
     const {
