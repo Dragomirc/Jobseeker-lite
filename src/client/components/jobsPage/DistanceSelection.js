@@ -2,30 +2,26 @@ import React,{Component} from "react";
 import {connect} from "react-redux";
 import { withRouter } from "react-router-dom";
 import {storeSearchValues, fetchJobs} from "../../actions/index";
+import { createPath } from "../helperFunctions"
+import * as qs from "query-string";
 
 class DistanceSelection extends Component{
     state = {
         distanceFromLocation : "10"
     }
-
-    onDistanceSelect  = (event) => {
-        const {searchValues, storeSearchValues, fetchJobs,history} = this.props;
-        this.setState({distanceFromLocation : event.target.value}, 
-            () => { storeSearchValues({distanceFromLocation: this.state.distanceFromLocation});
-                   const { keywords = "", locationName = "" } = searchValues;
-                   history.push(`/jobs/${keywords}/${locationName}/${this.state.distanceFromLocation}`);
-                   fetchJobs({...searchValues,...this.state});
-                }
-        );
-  
-        
-        
-        
-
-    }
+   
+    onDistanceSelect  = (event) => {       
+        this.setState({distanceFromLocation : event.target.value},
+            () => { 
+                const { searchValues, fetchJobs, storeSeachValues, history} = this.props;
+                storeSearchValues({...this.state});
+                history.push(createPath({...searchValues,...this.state}));
+                fetchJobs({...searchValues,...this.state});            
+        });                
+   }
 
     render(){
-        const { distanceFromLocation : distanceFromLocationParams } = this.props.match.params;
+        const { distanceFromLocation : distanceFromLocationParams } = qs.parse(this.props.location.search);
         const { distanceFromLocation } = this.state;
         return(
         <div>

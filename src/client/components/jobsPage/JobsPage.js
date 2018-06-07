@@ -11,11 +11,9 @@ class JobsPage extends Component {
     const values = qs.parse(this.props.location.search);
     this.props.storeSearchValues(values)
     this.props.fetchJobs(values);
-    // const { params } = this.props.match;
-    // this.props.storeSearchValues(params)
-    // this.props.fetchJobs(params);
- 
   }
+
+  
 
  
   render() {
