@@ -33,14 +33,14 @@ class JobDetailsPage extends Component {
       job || fetchedSingleJob;
     return (
       <div className="container">
-        <h2>Title: {jobTitle}</h2>
-        <div>Posted by {employerName}</div>
+        <h2><b>Title:</b> {jobTitle}</h2>
+        <div><b>Posted by</b> {employerName}</div>
         <div>
-          Salary: {minimumSalary} - {maximumSalary} {currency}
+          <b>Salary:</b> {minimumSalary} - {maximumSalary} {currency}
         </div>
-        <div>Location: {locationName}</div>
+        <div><b>Location:</b> {locationName}</div>
 
-        <p>Description: {jobDescription}</p>
+        <p><b>Description:</b> {jobDescription}</p>
       </div>
     );
   }

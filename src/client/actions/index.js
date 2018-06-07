@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_JOBS, STORE_SEARCH_VALUES, FETCH_SINGLE_JOB } from "./types";
+import { FETCH_JOBS, STORE_SEARCH_VALUES, FETCH_SINGLE_JOB, RESET_JOBS } from "./types";
 import jobs from "./mockApiResponse";
 import { API_KEY } from "../../../config.env";
 const BASE_URL =
@@ -30,6 +30,11 @@ export const fetchJobs = ({
   }
 };
 
+export const resetJobs = () => dispatch => {
+  dispatch({
+    type: RESET_JOBS
+  })
+}
 export const storeSearchValues = (searchValues) => dispatch => {
   dispatch({
     type: STORE_SEARCH_VALUES,

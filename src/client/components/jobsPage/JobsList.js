@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import JobItem from "./JobItem";
+import Loading from "../Loading";
 
 const JobsList = ({ jobs }) => {
   const renderJobs = _.map(jobs, job => (
@@ -8,7 +9,7 @@ const JobsList = ({ jobs }) => {
   ));
 
   if (!Object.keys(jobs).length) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   return <ul className="list-group">{renderJobs}</ul>;
 };

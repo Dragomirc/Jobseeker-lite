@@ -13,12 +13,11 @@ export default class App extends Component {
       <BrowserRouter>
         <div>
           <Header />
-          <Route exact path="/" component={HomePage} />        
-          <Route  path="/jobs" component={JobsPage} />
-          <Route exact path="/jobDetails/:id" component={JobDetailsPage} />
+            <Route exact path="/" component={HomePage} />        
+            <Route  path="/jobs" component={JobsPage} />
+            <Route exact path="/jobDetails/:id" component={JobDetailsPage} />
         </div>
       </BrowserRouter>
     );
   }
 }
-//  <Route  path="/jobs/:keywords?/:locationName?/:distanceFromLocation?" component={JobsPage} />

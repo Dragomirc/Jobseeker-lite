@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as qs from "query-string";
-import { storeSearchValues, fetchJobs } from "../actions/index";
+import { storeSearchValues, fetchJobs, resetJobs } from "../actions/index";
 import {createPath} from "./helperFunctions";
 
 
@@ -19,8 +19,7 @@ class SearchBar extends Component {
 
   onInputChange = event => {
     this.setState({ [event.target.name]: event.target.value }, () => this.props.storeSearchValues(this.state));  
-  };
-  
+  };  
 
   checkThePageRefreshed = () => {    
        if(this.state.pageRefreshed){
@@ -33,10 +32,10 @@ class SearchBar extends Component {
 
   onFormSubmit = event => {
     event.preventDefault();
-    const { fetchJobs,  searchValues, fromJobsPage } = this.props;  
+    const { fetchJobs,  searchValues, fromJobsPage, resetJobs } = this.props;  
     this.props.history.push(createPath(searchValues));
-    fromJobsPage ? fetchJobs(this.state) : null;
-      
+    resetJobs();
+    fromJobsPage ? fetchJobs(this.state) : null;   
     
   };
 
@@ -85,6 +84,7 @@ const mapStateToProps = ({ searchValues }) => ({ searchValues });
 export default withRouter(
   connect(mapStateToProps, {
     storeSearchValues,
-    fetchJobs
+    fetchJobs,
+    resetJobs
   })(SearchBar)
 );

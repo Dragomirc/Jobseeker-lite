@@ -6,22 +6,25 @@ import DistanceSelection from "./DistanceSelection"
 import SearchBar from "../SearchBar";
 import { fetchJobs, storeSearchValues } from "../../actions/index";
 
-class JobsPage extends Component {
+class JobsPage extends Component { 
+  
   componentDidMount() {
     const values = qs.parse(this.props.location.search);
     this.props.storeSearchValues(values)
     this.props.fetchJobs(values); 
   }
 
- 
+
   render() {
     const { locationName } = qs.parse(this.props.location.search); 
-    return (
+    return (  
       <div>
         <SearchBar fromJobsPage={true} />
-        { locationName && <DistanceSelection /> }
-        <JobsList jobs={this.props.jobs} />
-      </div>
+        <div className="jobsPage-container">
+            { locationName && <DistanceSelection /> }
+            <JobsList jobs={this.props.jobs} />
+        </div> 
+      </div>    
     );
   }
 }

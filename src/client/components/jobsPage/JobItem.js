@@ -18,12 +18,12 @@ const JobItem = ({
     <Link to={`/jobDetails/${jobId}`}>
       <li className="list-group-item">
         <h2>{jobTitle}</h2>
-        <div>Posted by {employerName}</div>
+        <div><b>Posted by</b> {employerName}</div>
         <div>
-          Salary: {minimumSalary} - {maximumSalary} {currency}
+          <b>Salary:</b> {minimumSalary} - {maximumSalary} {currency}
         </div>
-        <div>Location: {locationName}</div>
-        <p>Description: {jobDescription}</p>
+        <div><b>Location:</b> {locationName}</div>
+        <p><b>Description:</b>{jobDescription}</p>
       </li>
     </Link>
   );

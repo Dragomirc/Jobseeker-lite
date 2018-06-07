@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 import {connect} from "react-redux";
 import { withRouter } from "react-router-dom";
-import {storeSearchValues, fetchJobs} from "../../actions/index";
+import {storeSearchValues, fetchJobs, resetJobs } from "../../actions/index";
 import { createPath } from "../helperFunctions"
 import * as qs from "query-string";
 
@@ -13,9 +13,10 @@ class DistanceSelection extends Component{
     onDistanceSelect  = (event) => {       
         this.setState({distanceFromLocation : event.target.value},
             () => { 
-                const { searchValues, fetchJobs, storeSeachValues, history} = this.props;
+                const { searchValues, fetchJobs, storeSearchValues, history, resetJobs } = this.props;
                 storeSearchValues({...this.state});
                 history.push(createPath({...searchValues,...this.state}));
+                resetJobs();
                 fetchJobs({...searchValues,...this.state});            
         });                
    }
@@ -24,7 +25,7 @@ class DistanceSelection extends Component{
         const { distanceFromLocation : distanceFromLocationParams } = qs.parse(this.props.location.search);
         const { distanceFromLocation } = this.state;
         return(
-        <div>
+        <div className="distance-selection">
         <div>Distance</div>
         <select value={distanceFromLocationParams ? distanceFromLocationParams : distanceFromLocation } onChange={this.onDistanceSelect}>
             <option value={0}>0 miles</option>
@@ -44,4 +45,4 @@ class DistanceSelection extends Component{
 
 const mapStateToProps = ({searchValues}) => ({searchValues});
 
-export default withRouter(connect(mapStateToProps,{storeSearchValues, fetchJobs})(DistanceSelection));
+export default withRouter(connect(mapStateToProps,{ storeSearchValues, fetchJobs, resetJobs})(DistanceSelection));
