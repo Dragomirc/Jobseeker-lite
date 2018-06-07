@@ -27,7 +27,6 @@ class DistanceSelection extends Component{
     render(){
         const { distanceFromLocation : distanceFromLocationParams } = this.props.match.params;
         const { distanceFromLocation } = this.state;
-        console.log("distanceFromLocationParams", this.props.match.params)
         return(
         <div>
         <div>Distance</div>

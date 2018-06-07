@@ -7,27 +7,43 @@ import { storeSearchValues, fetchJobs } from "../actions/index";
 class SearchBar extends Component {
   state = {
     keywords: "",
-    locationName: ""
+    locationName: "",
+    pageRefreshed: true
   };
+ 
+  componentDidMount(){
+    this.checkThePageRefreshed();
+  }
+
 
   onInputChange = event => {
     this.setState({ [event.target.name]: event.target.value }, () => this.props.storeSearchValues(this.state));  
   };
-
+  
+  checkThePageRefreshed = () => {    
+       if(this.state.pageRefreshed){
+         this.setState((prevState, props)=> {
+           return { pageRefreshed: !prevState.pageRefreshed}
+         });
+         const { keywords : keywordsParams,locationName : locationNameParams } = this.props.match.params;
+         this.refs.searchInput.value = keywordsParams ? keywordsParams : "";
+         this.refs.locationInput.value = locationNameParams ? locationNameParams : "";
+       }
+  }
   onFormSubmit = event => {
     event.preventDefault();
     const {keywords, locationName} = this.state
-    const { fetchJobs, fromJobsPage } = this.props;   
+    const { fetchJobs, fromJobsPage } = this.props;  
     this.props.history.push(`/jobs/${keywords}/${locationName}`);
     fromJobsPage ? fetchJobs(this.state) : null;
       
     
   };
 
+
   render() {
     const { keywords, locationName } = this.state;
-    const { keywords : keywordsParams,locationName : locationNameParams } = this.props.match.params;
-   
+ 
     return (
       <form
         className="main-search-bar form-group row"
@@ -38,7 +54,7 @@ class SearchBar extends Component {
           <input
             className="form-control"
             onChange={this.onInputChange}
-            value = {keywords ? keywords : (keywordsParams ? keywordsParams : "") }
+            ref = "searchInput"
             type="text"
             id="search-term"
             name="keywords"
@@ -50,7 +66,7 @@ class SearchBar extends Component {
           <input
             className="form-control"
             onChange={this.onInputChange}
-            value = {locationName ? locationName : (locationNameParams ? locationNameParams : "") }
+            ref = "locationInput"
             type="text"
             id="location"
             name="locationName"
