@@ -16,35 +16,43 @@ class SearchBar extends Component {
     this.checkThePageRefreshed();
   }
 
-
   onInputChange = event => {
     this.setState({ [event.target.name]: event.target.value }, () => this.props.storeSearchValues(this.state));  
   };
   
   checkThePageRefreshed = () => {    
        if(this.state.pageRefreshed){
+        const { keywords = "", locationName = "" } = qs.parse(this.props.location.search);
          this.setState((prevState, props)=> {
-           return { pageRefreshed: !prevState.pageRefreshed}
+           return { keywords, locationName, pageRefreshed: !prevState.pageRefreshed}
          });
-         const { keywords ,locationName } = qs.parse(this.props.location.search);
-         this.refs.searchInput.value = keywords ;
-         this.refs.locationInput.value = locationName;
        }
   }
+
   onFormSubmit = event => {
     event.preventDefault();
     const {keywords, locationName} = this.state
     const { fetchJobs, fromJobsPage } = this.props;  
-    this.props.history.push(`/jobs?keywords=${keywords}&locationName=${locationName}`);
+    this.props.history.push(this.createPath(this.state));
     fromJobsPage ? fetchJobs(this.state) : null;
       
     
   };
 
+  createPath = state => {
+    let path = "/jobs?";
+      for(let property in state){
+        let value = state[property];
+        if(state.hasOwnProperty(property) && value){
+           path += `${property}=${value}&`
+        }
+      }
+    return path;
+  }
+
 
   render() {
     const { keywords, locationName } = this.state;
- 
     return (
       <form
         className="main-search-bar form-group row"
@@ -55,7 +63,7 @@ class SearchBar extends Component {
           <input
             className="form-control"
             onChange={this.onInputChange}
-            ref = "searchInput"
+            value = {keywords}
             type="text"
             id="search-term"
             name="keywords"
@@ -67,7 +75,7 @@ class SearchBar extends Component {
           <input
             className="form-control"
             onChange={this.onInputChange}
-            ref = "locationInput"
+            value = { locationName }
             type="text"
             id="location"
             name="locationName"
