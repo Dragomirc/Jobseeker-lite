@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import * as qs from "query-string";
 import { storeSearchValues, fetchJobs } from "../actions/index";
 
 
@@ -25,16 +26,16 @@ class SearchBar extends Component {
          this.setState((prevState, props)=> {
            return { pageRefreshed: !prevState.pageRefreshed}
          });
-         const { keywords : keywordsParams,locationName : locationNameParams } = this.props.match.params;
-         this.refs.searchInput.value = keywordsParams ? keywordsParams : "";
-         this.refs.locationInput.value = locationNameParams ? locationNameParams : "";
+         const { keywords ,locationName } = qs.parse(this.props.location.search);
+         this.refs.searchInput.value = keywords ;
+         this.refs.locationInput.value = locationName;
        }
   }
   onFormSubmit = event => {
     event.preventDefault();
     const {keywords, locationName} = this.state
     const { fetchJobs, fromJobsPage } = this.props;  
-    this.props.history.push(`/jobs/${keywords}/${locationName}`);
+    this.props.history.push(`/jobs?keywords=${keywords}&locationName=${locationName}`);
     fromJobsPage ? fetchJobs(this.state) : null;
       
     
