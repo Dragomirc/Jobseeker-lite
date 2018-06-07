@@ -10,25 +10,23 @@ class JobsPage extends Component {
   componentDidMount() {
     const values = qs.parse(this.props.location.search);
     this.props.storeSearchValues(values)
-    this.props.fetchJobs(values);
+    this.props.fetchJobs(values); 
   }
-
-  
 
  
   render() {
-
+    const { locationName } = qs.parse(this.props.location.search); 
     return (
       <div>
         <SearchBar fromJobsPage={true} />
-        <DistanceSelection />
+        { locationName && <DistanceSelection /> }
         <JobsList jobs={this.props.jobs} />
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ jobs }) => ({ jobs });
+const mapStateToProps = ({ jobs, searchValues }) => ({ jobs, searchValues });
 export default connect(mapStateToProps, { fetchJobs, storeSearchValues })(
   JobsPage
 );
