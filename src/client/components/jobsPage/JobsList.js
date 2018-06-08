@@ -7,11 +7,17 @@ const JobsList = ({ jobs }) => {
   const renderJobs = _.map(jobs, job => (
     <JobItem key={job.jobId} jobDetails={job} />
   ));
-
-  if (!Object.keys(jobs).length) {
+  const jobsNumber = Object.keys(jobs).length;
+  if (!jobsNumber) {
     return <Loading />;
   }
-  return <ul className="list-group">{renderJobs}</ul>;
+
+return (
+<div className="jobsList-container">
+    <div className="jobsList-title">{jobsNumber} Jobs & Vacancies</div>
+    <ul className="list-group">{renderJobs}</ul>
+</div>   
+    );
 };
 
 export default JobsList;

@@ -128,20 +128,33 @@ nav {
   display: flex;
 
 }
-
-.list-group {
+.jobsList-container{
   width:80%;
   margin: 0 auto;
-  
-  li {
-    color: #000000c7;
+
+  .jobsList-title{
+    background-color: #fff;
+    height: 90px;
+    padding: 1rem;
+    border: 1px rgba(0, 0, 0, 0.125) solid;
+    text-align: center;
+    line-height: 50px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e84188;
+    
   }
-  a:hover,
-  a:active{
+.list-group {  
+   li  {
+     color: #000000c7;
+   }
+   a:hover,
+   a:active{
     text-decoration: none;
     border: 1px solid #0056b3;
     border-radius: 5px;
-  }
+   }
+ }
 }
 
 .distance-selection {
@@ -156,6 +169,8 @@ nav {
     width: 100%;
   }
 }
+
+
 @media (min-width: 576px) { 
 
      .main-header__mobile-menu-item{
