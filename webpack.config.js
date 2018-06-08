@@ -39,7 +39,15 @@ module.exports = {
             loader: "sass-loader" // compiles Sass to CSS
           }
         ]
-      }
+      },
+      {
+        test: /\.(pdf|jpg|png|gif|svg|ico)$/,
+        use: [
+            {
+                loader: 'url-loader'
+            }
+        ]
+    }
     ]
   },
   devServer: {

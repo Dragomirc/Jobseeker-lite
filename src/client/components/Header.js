@@ -1,4 +1,6 @@
 import React from "react";
+import reedLogo from "../../images/reed-logo.png";
+
 
 const Header = () => {
   return (
@@ -6,7 +8,7 @@ const Header = () => {
       <nav>
         <ul>
           <li className="main-header__mobile-menu-item">
-            <img src="" alt="Mobile Menu" />
+            <img src={reedLogo} alt="Mobile Menu" />
           </li>
           <li>
             <a href="#" title="Home Page">
