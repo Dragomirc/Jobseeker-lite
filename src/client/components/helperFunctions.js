@@ -6,5 +6,5 @@ export const createPath = state => {
            path += `${property}=${value}&`
         }
       }
-    return path;
+    return path.slice(0,-1);
   }
