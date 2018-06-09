@@ -15,7 +15,6 @@ class JobDetailsPage extends Component {
     const { id } = this.props.match.params;
     const { jobs, fetchedSingleJob } = this.props;
     let job = jobs[id];
-
     if (!(Object.keys(jobs).length || Object.keys(fetchedSingleJob).length)) {
       return <Loading />;
     }
@@ -34,14 +33,22 @@ class JobDetailsPage extends Component {
       job || fetchedSingleJob;
     return (
       <div className="container">
-        <h2><b>Title:</b> {jobTitle}</h2>
-        <div><b>Posted by</b> {employerName}</div>
+        <h2>
+          <b>Title:</b> {jobTitle}
+        </h2>
+        <div>
+          <b>Posted by</b> {employerName}
+        </div>
         <div>
           <b>Salary:</b> {minimumSalary} - {maximumSalary} {currency}
         </div>
-        <div><b>Location:</b> {locationName}</div>
+        <div>
+          <b>Location:</b> {locationName}
+        </div>
 
-        <p><b>Description:</b> {jobDescription}</p>
+        <p>
+          <b>Description:</b> {jobDescription}
+        </p>
       </div>
     );
   }
