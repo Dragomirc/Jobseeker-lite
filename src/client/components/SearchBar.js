@@ -35,7 +35,7 @@ class SearchBar extends Component {
     const { fetchJobs,  searchValues, fromJobsPage, resetJobs } = this.props;  
     this.props.history.push(createPath(searchValues));
     resetJobs();
-    fromJobsPage ? fetchJobs(this.state) : null;   
+    fromJobsPage ? fetchJobs(searchValues) : null;   
     
   };
 
