@@ -3,8 +3,7 @@
 
 
 
-1. `git clone git@gitlab.reedlabs.co.uk:robin-kerrison/jobseeker-lite.git`
-
+1. `git clone https://github.com/Dragomirc/Jobseeker-lite.git`
 2. `npm i`
 
 3. Create a config.env file in the root directoyry and [request a Jobseeker API key](https://www.reed.co.uk/developers/Jobseeker)
