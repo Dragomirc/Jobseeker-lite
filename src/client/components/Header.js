@@ -1,18 +1,18 @@
 import React from "react";
 import reedLogo from "../../images/reed-logo.png";
 
-
 const Header = () => {
+  console.log("reedLogon", reedLogo);
   return (
     <header className="main-header">
       <nav>
         <ul>
           <li className="main-header__mobile-menu-item">
-            <img src={reedLogo} alt="Mobile Menu" />
+            <img src="" alt="Mobile Menu" />
           </li>
           <li>
             <a href="#" title="Home Page">
-              <img src="" alt="Reed logo" />
+              <img src={reedLogo} alt="Reed logo" />
             </a>
           </li>
           <li className="main-nav__item-jobs">
