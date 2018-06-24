@@ -1,12 +1,14 @@
 const path = require("path");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const outputDirectory = "dist";
 module.exports = {
   entry: ["babel-polyfill", "./src/client/index.js"],
+
   output: {
     path: path.join(__dirname, outputDirectory),
-    filename: "bundle.js",
+    filename: "[name].[hash].js",
     publicPath: "/"
   },
   module: {
@@ -59,9 +61,21 @@ module.exports = {
     }
   },
   plugins: [
+    new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       favicon: "./public/favicon.ico"
     })
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all"
+        }
+      }
+    }
+  }
 };
