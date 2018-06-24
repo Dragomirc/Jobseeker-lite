@@ -16,10 +16,12 @@ class SearchBar extends Component {
     this.checkThePageRefreshed();
   }
 
-  onInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value }, () =>
-      this.props.storeSearchValues(this.state)
-    );
+  onInputChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value }, () => {
+      if (name === "locationName" && value.length === 0) {
+        this.props.storeSearchValues({ distanceFromLocation: "10" });
+      }
+    });
   };
 
   checkThePageRefreshed = () => {
@@ -38,11 +40,18 @@ class SearchBar extends Component {
   };
 
   onFormSubmit = event => {
-    event.preventDefault();
-    const { fetchJobs, searchValues, fromJobsPage, resetJobs } = this.props;
-    this.props.history.push(createPath(searchValues));
+    this.props.storeSearchValues(this.state);
+    const {
+      fetchJobs,
+      searchValues,
+      fromJobsPage,
+      resetJobs,
+      history
+    } = this.props;
+    history.push(createPath(searchValues));
     resetJobs();
     fromJobsPage ? fetchJobs(searchValues) : null;
+    event.preventDefault();
   };
 
   render() {
