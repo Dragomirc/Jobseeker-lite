@@ -5,7 +5,7 @@ import {
   FETCH_SINGLE_JOB,
   RESET_JOBS
 } from "./types";
-import jobs from "./mockApiResponse";
+
 import { API_KEY } from "../../../config.env";
 const BASE_URL =
   "https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/";

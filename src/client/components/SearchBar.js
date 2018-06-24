@@ -56,6 +56,7 @@ class SearchBar extends Component {
 
   render() {
     const { keywords, locationName } = this.state;
+
     return (
       <form
         className="main-search-bar form-group row"
