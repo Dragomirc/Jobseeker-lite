@@ -1,10 +1,14 @@
 import axios from "axios";
-import { FETCH_JOBS, STORE_SEARCH_VALUES, FETCH_SINGLE_JOB, RESET_JOBS } from "./types";
+import {
+  FETCH_JOBS,
+  STORE_SEARCH_VALUES,
+  FETCH_SINGLE_JOB,
+  RESET_JOBS
+} from "./types";
 import jobs from "./mockApiResponse";
 import { API_KEY } from "../../../config.env";
 const BASE_URL =
   "https://cors-anywhere.herokuapp.com/https://www.reed.co.uk/api/1.0/";
-//{versionnumber}/search?keywords={keywords}&loc ationName={locationName}&employerId={employerId}&distanceFromLocation={distance in miles}
 
 export const fetchJobs = ({
   keywords = "",
@@ -33,9 +37,9 @@ export const fetchJobs = ({
 export const resetJobs = () => dispatch => {
   dispatch({
     type: RESET_JOBS
-  })
-}
-export const storeSearchValues = (searchValues) => dispatch => {
+  });
+};
+export const storeSearchValues = searchValues => dispatch => {
   dispatch({
     type: STORE_SEARCH_VALUES,
     payload: searchValues

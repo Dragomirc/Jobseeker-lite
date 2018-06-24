@@ -21,7 +21,6 @@ class JobsPage extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { searchValues, fetchJobs, history } = this.props;
-    // console.log("HISTORY", this.props);
     if (prevProps.searchValues !== searchValues) {
       history.push(createPath(searchValues));
       this.props.fetchJobs(searchValues);
