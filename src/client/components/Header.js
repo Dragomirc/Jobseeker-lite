@@ -2,7 +2,6 @@ import React from "react";
 import reedLogo from "../../images/reed-logo.png";
 
 const Header = () => {
-  console.log("reedLogon", reedLogo);
   return (
     <header className="main-header">
       <nav>
